@@ -31,17 +31,20 @@ class Active:
         """
         self.db_action('use {}' .format(which_db))
         self.db_action("show tables;")
-        return self.cur.fetchall()
+        #TODO put abreak if the tables are more than one.
+        return str(self.cur.fetchall()).replace(',)', "").replace('(', '').replace(')', "")
 
     def tb_describe(self, which_db):
-        print(eval(self.tb_display(which_db)))
-        exit()
+        """
+        :param which_db: Describing the tables this a DB (which_db)
+        :return: All the table name with each column being in a tuple.
+        """
         self.db_action("use %s" % which_db)
-        self.db_action("describe %s" % self.tb_display(which_db))
-        return self.cur.fetchall()
+        self.db_action("describe %s;" % self.tb_display(which_db).replace("'", ""))
+        return list(self.cur.fetchall())
 
 
 a = Active()
 print(a.db_showing())
 print(a.tb_display('db_info'))
-
+print(a.tb_describe('db_info'))
