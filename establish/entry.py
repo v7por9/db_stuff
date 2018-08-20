@@ -4,6 +4,8 @@ import pymysql
 class Active:
     def __init__(self):
         self.password = input("Enter database password: ")
+        if self.password == "":
+            self.password = "storage"
         self.con = pymysql.connect(host='localhost', user='root', port=3306, passwd=self.password)
         self.cur = self.con.cursor()
         return
@@ -20,7 +22,7 @@ class Active:
         :return: All the databases that have been created.
         """
         self.db_action("show databases;")
-        return self.cur.fetchall()
+        return list(eval((str(self.cur.fetchall()).replace(',)', "").replace('(', '').replace(')', ""))))
 
     def tb_display(self, which_db):
         """
@@ -41,5 +43,5 @@ class Active:
 
 a = Active()
 print(a.db_showing())
-print(a.tb_display('ptr_database'))
-print(a.tb_describe("ptr_database"))
+print(a.tb_display('db_info'))
+
