@@ -11,7 +11,7 @@ from math import log
 
 class Filling:
     def __init__(self):
-        self.path = '/mnt/ice' #input("Enter path:")
+        self.path = input("Enter path:")
         self.gen = []
         try:
             for folder, sub, files in os.walk(self.path):
@@ -25,15 +25,15 @@ class Filling:
 class Project:
         def __init__(self):
             # Details of logging into the server.
-            """self.host, self.user, self.password, self.port = input("Enter mysql host IP: "), \
+            self.host, self.user, self.password, self.port = input("Enter mysql host IP: "), \
                                                              input("Enter username: "),\
                                                              input("Enter password: "), input("Enter port: ")
 
-            if self.host == '' or self.user == '' or self.port == '':"""
-            self.host = 'localhost'
-            self.user = 'root'
-            self.port = 3306
-            self.password = 'storage'
+            if self.host == '' or self.user == '' or self.port == '':
+                self.host = 'localhost'
+                self.user = 'root'
+                self.port = 3306
+                self.password = ''
             self.table_set = time.asctime().split(" ")
             self.time_name = self.table_set[-2].split(":")
             self.db_name = self.table_set[-1] + "_" + self.table_set[1] + "_" + \
