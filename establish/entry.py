@@ -5,7 +5,7 @@ class Active:
     def __init__(self):
         self.password = input("Enter database password: ")
         if self.password == "":
-            self.password = "storage"
+            self.password = input("Enter password: ")
         self.con = pymysql.connect(host='localhost', user='root', port=3306, passwd=self.password)
         self.cur = self.con.cursor()
         return
